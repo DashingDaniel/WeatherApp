@@ -1,0 +1,37 @@
+<% include ./partials/header.ejs %>
+<div class="container">
+    <div class="page-header">
+        <br>
+        <h1 class="text-center">Weather app</h1>
+        <h4 class="text-center">Enter your city and Country code to find the weather</h4>
+    </div>
+    <br>
+    <form action="/find" method="POST">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="city">City Name</label>
+                    <input type="text" name="city" class="form-control" id="city" placeholder="City Name">
+                </div>
+                <div class="form-group">
+                    <label for="code">Country Code</label>
+                    <input type="text" name="code" class="form-control" id="code" placeholder="eg for India it's IN">
+                </div>
+                <button type="submit" class="btn btn-primary">Find Weather</button>
+            </div>
+    </form>
+    <% if(retrievedData){ %>
+        <div class="card border-secondary mb-3">
+                <div class="card-header"><h2 class="text-center"><%= retrievedData.name %></h2></div>
+                <div class="card-body">
+                  <h4 class="card-title">Condition: <%= retrievedData.weather[0].main %></h4>
+                  <p class="card-text">Description: <%= retrievedData.weather[0].description %></p>
+                  <h4 class="card-title">Temperature</h4>
+                  <p class="card-text"><%= retrievedData.main.temp -273.15 %>&deg;C</p>
+                </div>
+        </div>
+        
+    <% }else{ %>
+        <p>Make a new search</p>
+    <% } %>
+</div>
+<% include ./partials/footer.ejs %>
